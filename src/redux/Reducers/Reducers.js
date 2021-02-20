@@ -1,5 +1,11 @@
 const initalState = {
-  todos: [],
+  todos: [
+    {
+      title: "TODO 1",
+      id: 1,
+      completed: false,
+    },
+  ],
 };
 
 // REDUCER

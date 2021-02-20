@@ -9,7 +9,6 @@ import Container from "@material-ui/core/Container";
 import { v4 as uuidv4 } from "uuid";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Typography from "@material-ui/core/Typography";
-import DoneIcon from "@material-ui/icons/Done";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from "@material-ui/core/IconButton";
@@ -49,7 +48,7 @@ const AddTodo = () => {
       const newTodo = {
         title: title,
         id: uuidv4(),
-        completed: true,
+        completed: false,
       };
       dispatch(createTodo(newTodo));
       setTitle("");
@@ -105,7 +104,11 @@ const AddTodo = () => {
           <List>
             {storeData.todos.map((item) => {
               return (
-                <ListItem key={item.id} button>
+                <ListItem
+                  key={item.id}
+                  button={true}
+                  onClick={() => dispatch(completeTodo(item.id))}
+                >
                   <ListItemIcon>
                     {item.completed ? (
                       <CheckCircleIcon color="primary" />
@@ -122,13 +125,6 @@ const AddTodo = () => {
                     }}
                   />
                   <ListItemSecondaryAction>
-                    <IconButton
-                      edge="end"
-                      aria-label="done"
-                      onClick={() => dispatch(completeTodo(item.id))}
-                    >
-                      <DoneIcon />
-                    </IconButton>
                     <IconButton
                       edge="end"
                       aria-label="delete"
