@@ -41,7 +41,6 @@ const AddTodo = () => {
 
   const [title, setTitle] = useState("");
   const [toggle, setToggle] = useState(false);
-  let updatedData = {};
 
   const handleSubmit = () => {
     if (!toggle) {
@@ -53,10 +52,7 @@ const AddTodo = () => {
       dispatch(createTodo(newTodo));
       setTitle("");
     } else {
-      console.log(updatedData);
-      // dispatch(updateTodo(updatedData));
       setToggle(false);
-      // setTitle("");
     }
   };
 
