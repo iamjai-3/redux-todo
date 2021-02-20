@@ -12,7 +12,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from "@material-ui/core/IconButton";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteTodo, updateTodo } from "../redux/Actions/Actions";
+import { deleteTodo, setTitle, updateTodo } from "../redux/Actions/Actions";
 
 const useStyles = makeStyles({
   container: {
@@ -24,6 +24,14 @@ const TodoList = () => {
   const classes = useStyles();
   const storeData = useSelector((state) => state);
   const dispatch = useDispatch();
+
+  const handleUpdate = (item) => {
+    const updatedData = {
+      title: item.title,
+    };
+    // dispatch(setTitle(item.title));
+    // dispatch(updateTodo(item.id));
+  };
 
   return (
     <Container className={classes.container} maxWidth="md">
@@ -45,14 +53,14 @@ const TodoList = () => {
                   <IconButton
                     edge="end"
                     aria-label="edit"
-                    onClick={() => dispatch(updateTodo(2))}
+                    onClick={handleUpdate(item)}
                   >
                     <EditIcon />
                   </IconButton>
                   <IconButton
                     edge="end"
                     aria-label="delete"
-                    onClick={() => dispatch(deleteTodo(2))}
+                    onClick={() => dispatch(deleteTodo(item.id))}
                   >
                     <DeleteIcon />
                   </IconButton>

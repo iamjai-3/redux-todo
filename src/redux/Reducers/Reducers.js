@@ -1,11 +1,5 @@
 const initalState = {
-  todos: [
-    {
-      title: "Todo 1",
-      id: 1,
-      completed: false,
-    },
-  ],
+  todos: [],
 };
 
 // REDUCER
@@ -29,23 +23,26 @@ const todoReducer = (state = initalState, actions) => {
         todos: deletedTodo,
       };
 
-    case "UPDATE_TODO":
-      // actions.payload will receive updated todo object.
-      const updatedTodo = state.todos.filter(
-        (todo) => todo.id !== actions.payload
-      );
-      return {
-        ...state,
-        todos: updatedTodo,
-      };
+    // case "UPDATE_TODO":
+    // console.log(actions.payload);
+    // actions.payload will receive updated todo object.
+    //   const updateIndex = state.todos.findIndex(  //
+    //     (element) => element.id === actions.payload.id
+    //   );
+    //   console.log(updateIndex);
+
+    //   return state;
 
     case "COMPLETED_TODO":
       // actions.payload will receive id of todo.
       const index = state.todos.findIndex(
-        (todo) => todo.id !== actions.payload
+        (todo) => todo.id === actions.payload
       );
       const completedTodo = [...state.todos];
-      completedTodo[index].completed = !completedTodo[index].completed;
+      completedTodo[index] = {
+        ...completedTodo[index],
+        completed: !completedTodo[index].completed,
+      };
       return {
         ...state,
         todos: completedTodo,
